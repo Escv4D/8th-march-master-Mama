@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Для тебя ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="intro-heart" aria-hidden="true">
+    <div class="intro-heart-icon">💗</div>
+  </div>
+  <div id="heart-rain" aria-hidden="true"></div>
+
+  <main class="app">
+    <section id="screen1" class="screen active">
+      <div class="panel">
+        <h1>Привет, любимая</h1>
+        <p class="lead">Я сделал это специально для тебя!</p>
+        <p class="sub">Пройди мини-игру, чтобы открыть свой сюрприз</p>
+        <div id="together-timer" class="together-timer" data-start-date="2024-10-25T20:00:00">
+          <p class="timer-title">Сколько мы вместе</p>
+          <p class="timer-value">
+            <span id="timer-days">0</span> дней
+          </p>
+        </div>
+        <button id="start-btn" class="btn">Начать игру →</button>
+      </div>
+    </section>
+
+    <section id="screen2" class="screen">
+      <div class="panel wide">
+        <h2>Почему я тебя люблю</h2>
+        <p class="sub">Нажми на сердечко слева, чтобы выбрать и раскрыть причину</p>
+
+        <div class="reasons" id="reasons-list">
+          <article class="reason-item" data-title="Твоя преданность">
+            <button class="heart-check" aria-pressed="false" type="button">🤍</button>
+            <div class="reason-body">
+              <h3>Твоя преданность</h3>
+              <p class="reason-text">Ты всегда рядом и искренне поддерживаешь меня.</p>
+            </div>
+          </article>
+
+          <article class="reason-item" data-title="Твоя нежность">
+            <button class="heart-check" aria-pressed="false" type="button">🤍</button>
+            <div class="reason-body">
+              <h3>Твоя нежность</h3>
+              <p class="reason-text">С тобой спокойно, тепло и по-настоящему уютно.</p>
+            </div>
+          </article>
+
+          <article class="reason-item" data-title="Твой юмор">
+            <button class="heart-check" aria-pressed="false" type="button">🤍</button>
+            <div class="reason-body">
+              <h3>Твой юмор</h3>
+              <p class="reason-text">Ты умеешь рассмешить даже в самый сложный день.</p>
+            </div>
+          </article>
+
+          <article class="reason-item" data-title="Твоя красота">
+            <button class="heart-check" aria-pressed="false" type="button">🤍</button>
+            <div class="reason-body">
+              <h3>Твоя красота</h3>
+              <p class="reason-text">Для меня ты самая красивая и особенная.</p>
+            </div>
+          </article>
+
+          <article class="reason-item" data-title="Твоё сердце">
+            <button class="heart-check" aria-pressed="false" type="button">🤍</button>
+            <div class="reason-body">
+              <h3>Твоё сердце</h3>
+              <p class="reason-text">Ты добрая, искренняя и очень светлая.</p>
+            </div>
+          </article>
+        </div>
+
+        <button id="to-game" class="btn">Далее →</button>
+      </div>
+    </section>
+
+    <section id="screen3" class="screen">
+      <div class="panel">
+        <h2>Давай сыграем перед сюрпризом</h2>
+        <p class="sub">Найди все пары</p>
+
+        <div class="stats">
+          <span>Ходы: <b id="moves">0</b></span>
+          <span>Пары: <b id="pairs">0</b>/<b id="pairs-total">6</b></span>
+        </div>
+
+        <div id="memory-grid" class="memory-grid"></div>
+        <p id="game-message" class="game-message">Открой две карточки.</p>
+
+        <div class="actions">
+          <button id="restart-game" class="btn btn-light" type="button">Начать заново</button>
+          <button id="to-memories" class="btn" type="button" disabled>К воспоминаниям →</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen4" class="screen">
+      <div class="panel wide">
+        <h2>Наши воспоминания</h2>
+        <p class="sub">Положи свои фото в папку <code>images</code> и укажи пути в <code>index.html</code></p>
+
+        <div class="gallery" id="gallery">
+          <article class="memory-card">
+            <div class="photo-wrap is-empty">
+              <img src="images/1.jpg" alt="Воспоминание 1" loading="lazy" decoding="async">
+            </div>
+            <p>Воспоминание 1</p>
+          </article>
+
+          <article class="memory-card">
+            <div class="photo-wrap is-empty">
+              <img src="images/2.jpg" alt="Воспоминание 2" loading="lazy" decoding="async">
+            </div>
+            <p>Воспоминание 2</p>
+          </article>
+
+          <article class="memory-card">
+            <div class="photo-wrap is-empty">
+              <img src="images/3.jpg" alt="Воспоминание 3" loading="lazy" decoding="async">
+            </div>
+            <p>Воспоминание 3</p>
+          </article>
+
+          <article class="memory-card">
+            <div class="photo-wrap is-empty">
+              <img src="images/4.jpg" alt="Воспоминание 4" loading="lazy" decoding="async">
+            </div>
+            <p>Воспоминание 4</p>
+          </article>
+
+          <article class="memory-card">
+            <div class="photo-wrap is-empty">
+              <img src="images/5.jpg" alt="Воспоминание 5" loading="lazy" decoding="async">
+            </div>
+            <p>Воспоминание 5</p>
+          </article>
+
+          <article class="memory-card">
+            <div class="photo-wrap is-empty">
+              <img src="images/6.jpg" alt="Воспоминание 6" loading="lazy" decoding="async">
+            </div>
+            <p>Воспоминание 6</p>
+          </article>
+        </div>
+
+        <button id="to-march8" class="btn">К поздравлению →</button>
+      </div>
+    </section>
+
+    <section id="screen5" class="screen">
+      <div class="panel">
+        <h2>С 8 Марта, любимая</h2>
+        <p class="lead">Пусть каждый день будет таким же теплым, как твоя улыбка.</p>
+        <p class="sub">Спасибо, что ты есть у меня. Люблю тебя очень сильно ❤️</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="photo-modal" class="photo-modal" aria-hidden="true">
+    <button id="photo-modal-close" class="photo-modal-close" type="button" aria-label="Закрыть">✕</button>
+    <img id="photo-modal-image" src="" alt="Увеличенное фото">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

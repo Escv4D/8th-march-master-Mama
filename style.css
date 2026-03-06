@@ -28,7 +28,6 @@ body.modal-open {
 
 .btn,
 .heart-check,
-.memory-card-btn,
 .photo-modal-close,
 .photo-wrap {
   touch-action: manipulation;
@@ -158,33 +157,6 @@ h3 {
   font-size: 23px;
 }
 
-.together-timer {
-  margin-top: 16px;
-  background: #fff;
-  border: 1px solid #ffd8e8;
-  border-radius: 16px;
-  padding: 10px 14px;
-}
-
-.timer-title {
-  margin: 0;
-  font-size: 14px;
-  color: #8c6e7c;
-}
-
-.timer-value {
-  margin: 6px 0 0;
-  color: var(--pink);
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: 0.4px;
-}
-
-.timer-value span {
-  min-width: 2ch;
-  display: inline-block;
-}
-
 .btn {
   margin-top: 24px;
   border: none;
@@ -212,13 +184,6 @@ h3 {
 .btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
-  box-shadow: none;
-}
-
-.btn-light {
-  color: var(--pink);
-  background: #fff;
-  border: 1px solid #ffd0e3;
   box-shadow: none;
 }
 
@@ -270,76 +235,6 @@ h3 {
 .reason-item.selected .reason-text {
   display: block;
   animation: reasonTextIn 0.24s ease;
-}
-
-.stats {
-  margin: 18px auto;
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  font-size: 17px;
-  color: #785b67;
-}
-
-.stats span {
-  background: #fff;
-  border: 1px solid #ffd5e5;
-  border-radius: 999px;
-  padding: 8px 14px;
-}
-
-.memory-grid {
-  margin: 6px auto 0;
-  width: min(460px, 100%);
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.memory-card-btn {
-  aspect-ratio: 1 / 1;
-  border: 0;
-  border-radius: 12px;
-  background: #fff;
-  box-shadow: inset 0 0 0 1px #f5dbe6;
-  font-size: 32px;
-  cursor: pointer;
-  color: #a7a7a7;
-  transition: transform 0.18s ease, background 0.2s ease, box-shadow 0.2s ease;
-}
-
-.memory-card-btn.open {
-  background: #fff5fa;
-  color: #2f2430;
-  transform: scale(0.98);
-}
-
-.memory-card-btn.matched {
-  background: #ecffef;
-  box-shadow: inset 0 0 0 1px #bde8c4;
-  animation: matchPulse 0.36s ease;
-}
-
-.memory-card-btn.bonus {
-  background: #fff0f7;
-  color: #e64482;
-  box-shadow: inset 0 0 0 1px #f5c6dc;
-}
-
-.memory-card-btn:disabled {
-  cursor: default;
-}
-
-.game-message {
-  margin: 14px 0 0;
-  color: #7e6570;
-}
-
-.actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
 }
 
 .gallery {
@@ -489,18 +384,6 @@ h3 {
   }
 }
 
-@keyframes matchPulse {
-  0% {
-    transform: scale(0.9);
-  }
-  70% {
-    transform: scale(1.06);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 @keyframes pulseHeart {
   0%,
   100% {
@@ -557,10 +440,6 @@ h3 {
     font-size: 15px;
   }
 
-  .timer-value {
-    font-size: 19px;
-  }
-
   .btn {
     width: 100%;
     font-size: 18px;
@@ -585,32 +464,7 @@ h3 {
     font-size: 22px;
   }
 
-  .stats {
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .stats span {
-    padding: 6px 10px;
-  }
-
-  .memory-grid {
-    gap: 8px;
-  }
-
-  .memory-card-btn {
-    border-radius: 10px;
-    font-size: clamp(20px, 6vw, 28px);
-  }
-
-  .actions {
-    margin-top: 10px;
-    gap: 8px;
-  }
-
   .reason-text,
-  .stats,
-  .game-message,
   .memory-card p,
   .photo-wrap.is-empty::before {
     font-size: 14px;
@@ -632,16 +486,8 @@ h3 {
     padding-right: 10px;
   }
 
-  .memory-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .gallery {
     grid-template-columns: 1fr;
-  }
-
-  .stats {
-    font-size: 13px;
   }
 }
 
@@ -675,7 +521,6 @@ h3 {
 
 @media (prefers-reduced-motion: reduce) {
   .btn,
-  .memory-card-btn,
   .memory-card,
   .photo-modal {
     transition: none;
@@ -687,7 +532,6 @@ h3 {
 
   .panel,
   .reason-item.selected .reason-text,
-  .memory-card-btn.matched,
   #screen5 .panel::after,
   .intro-heart-icon {
     animation: none !important;

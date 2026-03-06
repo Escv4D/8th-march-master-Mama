@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Для тебя ❤️</title>
+  <title>Для мамы ❤️</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,93 +15,67 @@
   <main class="app">
     <section id="screen1" class="screen active">
       <div class="panel">
-        <h1>Привет, любимая</h1>
-        <p class="lead">Я сделал это специально для тебя!</p>
-        <p class="sub">Пройди мини-игру, чтобы открыть свой сюрприз</p>
-        <div id="together-timer" class="together-timer" data-start-date="2024-10-25T20:00:00">
-          <p class="timer-title">Сколько мы вместе</p>
-          <p class="timer-value">
-            <span id="timer-days">0</span> дней
-          </p>
-        </div>
-        <button id="start-btn" class="btn">Начать игру →</button>
+        <h1>С 8 Марта, мама</h1>
+        <p class="lead">Спасибо тебе за заботу, тепло и любовь.</p>
+        <p class="sub">Я сделал для тебя небольшое поздравление от сердца</p>
+        <button id="start-btn" class="btn">Открыть →</button>
       </div>
     </section>
 
     <section id="screen2" class="screen">
       <div class="panel wide">
-        <h2>Почему я тебя люблю</h2>
-        <p class="sub">Нажми на сердечко слева, чтобы выбрать и раскрыть причину</p>
+        <h2>Почему ты лучшая мама</h2>
+        <p class="sub">Нажми на сердечко, чтобы открыть каждую причину</p>
 
         <div class="reasons" id="reasons-list">
-          <article class="reason-item" data-title="Твоя преданность">
+          <article class="reason-item" data-title="Твоя забота">
             <button class="heart-check" aria-pressed="false" type="button">🤍</button>
             <div class="reason-body">
-              <h3>Твоя преданность</h3>
-              <p class="reason-text">Ты всегда рядом и искренне поддерживаешь меня.</p>
+              <h3>Твоя забота</h3>
+              <p class="reason-text">Ты всегда рядом и умеешь согреть даже одним словом.</p>
             </div>
           </article>
 
-          <article class="reason-item" data-title="Твоя нежность">
+          <article class="reason-item" data-title="Твоя мудрость">
             <button class="heart-check" aria-pressed="false" type="button">🤍</button>
             <div class="reason-body">
-              <h3>Твоя нежность</h3>
-              <p class="reason-text">С тобой спокойно, тепло и по-настоящему уютно.</p>
+              <h3>Твоя мудрость</h3>
+              <p class="reason-text">Ты всегда находишь правильные слова и даёшь лучшие советы.</p>
             </div>
           </article>
 
-          <article class="reason-item" data-title="Твой юмор">
+          <article class="reason-item" data-title="Твоя поддержка">
             <button class="heart-check" aria-pressed="false" type="button">🤍</button>
             <div class="reason-body">
-              <h3>Твой юмор</h3>
-              <p class="reason-text">Ты умеешь рассмешить даже в самый сложный день.</p>
+              <h3>Твоя поддержка</h3>
+              <p class="reason-text">С тобой я чувствую уверенность и силы идти вперёд.</p>
             </div>
           </article>
 
-          <article class="reason-item" data-title="Твоя красота">
+          <article class="reason-item" data-title="Твоя доброта">
             <button class="heart-check" aria-pressed="false" type="button">🤍</button>
             <div class="reason-body">
-              <h3>Твоя красота</h3>
-              <p class="reason-text">Для меня ты самая красивая и особенная.</p>
+              <h3>Твоя доброта</h3>
+              <p class="reason-text">Ты делаешь наш дом уютным и наполняешь его светом.</p>
             </div>
           </article>
 
-          <article class="reason-item" data-title="Твоё сердце">
+          <article class="reason-item" data-title="Твоя любовь">
             <button class="heart-check" aria-pressed="false" type="button">🤍</button>
             <div class="reason-body">
-              <h3>Твоё сердце</h3>
-              <p class="reason-text">Ты добрая, искренняя и очень светлая.</p>
+              <h3>Твоя любовь</h3>
+              <p class="reason-text">Твоя любовь вдохновляет и делает меня счастливее каждый день.</p>
             </div>
           </article>
         </div>
 
-        <button id="to-game" class="btn">Далее →</button>
-      </div>
-    </section>
-
-    <section id="screen3" class="screen">
-      <div class="panel">
-        <h2>Давай сыграем перед сюрпризом</h2>
-        <p class="sub">Найди все пары</p>
-
-        <div class="stats">
-          <span>Ходы: <b id="moves">0</b></span>
-          <span>Пары: <b id="pairs">0</b>/<b id="pairs-total">6</b></span>
-        </div>
-
-        <div id="memory-grid" class="memory-grid"></div>
-        <p id="game-message" class="game-message">Открой две карточки.</p>
-
-        <div class="actions">
-          <button id="restart-game" class="btn btn-light" type="button">Начать заново</button>
-          <button id="to-memories" class="btn" type="button" disabled>К воспоминаниям →</button>
-        </div>
+        <button id="to-memories" class="btn">К воспоминаниям →</button>
       </div>
     </section>
 
     <section id="screen4" class="screen">
       <div class="panel wide">
-        <h2>Наши воспоминания</h2>
+        <h2>Наши тёплые воспоминания</h2>
         <p class="sub">Положи свои фото в папку <code>images</code> и укажи пути в <code>index.html</code></p>
 
         <div class="gallery" id="gallery">
@@ -154,9 +128,9 @@
 
     <section id="screen5" class="screen">
       <div class="panel">
-        <h2>С 8 Марта, любимая</h2>
-        <p class="lead">Пусть каждый день будет таким же теплым, как твоя улыбка.</p>
-        <p class="sub">Спасибо, что ты есть у меня. Люблю тебя очень сильно ❤️</p>
+        <h2>С 8 Марта, мамочка</h2>
+        <p class="lead">Пусть каждый день приносит тебе радость, улыбки и спокойствие.</p>
+        <p class="sub">Спасибо тебе за всё. Я тебя очень люблю ❤️</p>
       </div>
     </section>
   </main>

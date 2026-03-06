@@ -1,15 +1,7 @@
 const screens = document.querySelectorAll('.screen');
 const startBtn = document.getElementById('start-btn');
-const toGameBtn = document.getElementById('to-game');
 const toMemoriesBtn = document.getElementById('to-memories');
 const toMarch8Btn = document.getElementById('to-march8');
-const restartGameBtn = document.getElementById('restart-game');
-const movesEl = document.getElementById('moves');
-const pairsEl = document.getElementById('pairs');
-const pairsTotalEl = document.getElementById('pairs-total');
-const gameMessageEl = document.getElementById('game-message');
-const memoryGridEl = document.getElementById('memory-grid');
-const togetherTimerEl = document.getElementById('together-timer');
 const introHeartEl = document.getElementById('intro-heart');
 const photoModalEl = document.getElementById('photo-modal');
 const photoModalImageEl = document.getElementById('photo-modal-image');
@@ -21,10 +13,15 @@ function showScreen(screenId) {
   });
 }
 
-startBtn.addEventListener('click', () => showScreen('screen2'));
-toGameBtn.addEventListener('click', () => showScreen('screen3'));
-toMemoriesBtn.addEventListener('click', () => showScreen('screen4'));
-toMarch8Btn.addEventListener('click', () => showScreen('screen5'));
+if (startBtn) {
+  startBtn.addEventListener('click', () => showScreen('screen2'));
+}
+if (toMemoriesBtn) {
+  toMemoriesBtn.addEventListener('click', () => showScreen('screen4'));
+}
+if (toMarch8Btn) {
+  toMarch8Btn.addEventListener('click', () => showScreen('screen5'));
+}
 
 // Hearts checkbox behavior on screen 2.
 document.querySelectorAll('.reason-item .heart-check').forEach((button) => {
@@ -37,135 +34,6 @@ document.querySelectorAll('.reason-item .heart-check').forEach((button) => {
     button.setAttribute('aria-pressed', String(willSelect));
   });
 });
-
-// Memory game.
-const baseSymbols = ['🐻', '🌸', '💖', '🎀', '🍓', '💌'];
-const compactGameMedia = window.matchMedia('(max-width: 420px)');
-let symbols = baseSymbols;
-let deck = [];
-let openCards = [];
-let lockBoard = false;
-let moves = 0;
-let pairs = 0;
-let targetPairs = baseSymbols.length;
-
-function shuffle(arr) {
-  const clone = [...arr];
-  for (let i = clone.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [clone[i], clone[j]] = [clone[j], clone[i]];
-  }
-  return clone;
-}
-
-function setGameText(message) {
-  gameMessageEl.textContent = message;
-}
-
-function updateStats() {
-  movesEl.textContent = String(moves);
-  pairsEl.textContent = String(pairs);
-}
-
-function closeCard(card) {
-  card.classList.remove('open');
-  card.textContent = '?';
-}
-
-function finishGame() {
-  setGameText('Ты нашла все пары. Сюрприз открыт ❤️');
-  toMemoriesBtn.disabled = false;
-}
-
-function onCardClick(card) {
-  if (lockBoard || card.classList.contains('open') || card.classList.contains('matched')) {
-    return;
-  }
-
-  card.classList.add('open');
-  card.textContent = card.dataset.symbol;
-  openCards.push(card);
-
-  if (openCards.length < 2) {
-    return;
-  }
-
-  moves += 1;
-  updateStats();
-
-  const [first, second] = openCards;
-  const isMatch = first.dataset.symbol === second.dataset.symbol;
-
-  if (isMatch) {
-    first.classList.add('matched');
-    second.classList.add('matched');
-    openCards = [];
-    pairs += 1;
-    updateStats();
-    setGameText('Отлично! Это пара.');
-
-    if (pairs === targetPairs) {
-      finishGame();
-    }
-    return;
-  }
-
-  lockBoard = true;
-  setGameText('Не совпало. Попробуй еще.');
-
-  setTimeout(() => {
-    closeCard(first);
-    closeCard(second);
-    openCards = [];
-    lockBoard = false;
-  }, 850);
-}
-
-function renderGame() {
-  if (compactGameMedia.matches) {
-    // 3x3 on phones: 4 pairs + 1 bonus tile.
-    deck = shuffle([...symbols, ...symbols, '✨']);
-  } else {
-    deck = shuffle([...symbols, ...symbols]);
-  }
-
-  memoryGridEl.innerHTML = '';
-  deck.forEach((symbol) => {
-    const card = document.createElement('button');
-    card.type = 'button';
-    card.className = 'memory-card-btn';
-
-    if (symbol === '✨') {
-      card.classList.add('bonus');
-      card.textContent = symbol;
-      card.disabled = true;
-      card.setAttribute('aria-label', 'Бонус');
-      memoryGridEl.appendChild(card);
-      return;
-    }
-
-    card.dataset.symbol = symbol;
-    card.textContent = '?';
-    card.addEventListener('click', () => onCardClick(card));
-    memoryGridEl.appendChild(card);
-  });
-}
-
-function startGameBoard() {
-  symbols = compactGameMedia.matches ? baseSymbols.slice(0, 4) : baseSymbols;
-  targetPairs = symbols.length;
-  openCards = [];
-  lockBoard = false;
-  moves = 0;
-  pairs = 0;
-  toMemoriesBtn.disabled = true;
-  if (pairsTotalEl) pairsTotalEl.textContent = String(targetPairs);
-  updateStats();
-  setGameText('Открой две карточки.');
-  renderGame();
-}
-
-restartGameBtn.addEventListener('click', startGameBoard);
 
 // Shows placeholder for missing gallery images.
 document.querySelectorAll('.memory-card img').forEach((image) => {
@@ -180,36 +48,6 @@ document.querySelectorAll('.memory-card img').forEach((image) => {
     setLoaded();
   }
 });
-
-// "How long together" timer.
-function updateTogetherTimer() {
-  if (!togetherTimerEl) return;
-  const startDateRaw = togetherTimerEl.dataset.startDate || '';
-  const match = startDateRaw.match(
-    /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/
-  );
-  if (!match) return;
-
-  const [, y, m, d, hh, mm, ss = '0'] = match;
-  // Build local datetime explicitly to avoid browser parsing quirks.
-  const startDate = new Date(
-    Number(y),
-    Number(m) - 1,
-    Number(d),
-    Number(hh),
-    Number(mm),
-    Number(ss)
-  );
-
-  const now = new Date();
-  const diffMs = Math.max(now.getTime() - startDate.getTime(), 0);
-  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-  document.getElementById('timer-days').textContent = String(days);
-}
-
-updateTogetherTimer();
-setInterval(updateTogetherTimer, 30000);
 
 // Intro heart animation.
 function hideIntroHeart() {
@@ -272,7 +110,7 @@ function canAnimateHearts() {
 }
 
 function spawnHeart() {
-  if (!canAnimateHearts()) return;
+  if (!heartRain || !canAnimateHearts()) return;
   if (heartRain.childElementCount >= maxHearts) return;
 
   const heart = document.createElement('span');
@@ -310,11 +148,9 @@ const onMotionMediaChange = (event) => {
 if (mobileMedia.addEventListener) {
   mobileMedia.addEventListener('change', onMobileMediaChange);
   motionMedia.addEventListener('change', onMotionMediaChange);
-  compactGameMedia.addEventListener('change', startGameBoard);
 } else {
   mobileMedia.addListener(onMobileMediaChange);
   motionMedia.addListener(onMotionMediaChange);
-  compactGameMedia.addListener(startGameBoard);
 }
 
 startHearts();
@@ -322,5 +158,4 @@ for (let i = 0; i < (isMobile ? 10 : 18); i += 1) {
   setTimeout(spawnHeart, i * (isMobile ? 190 : 140));
 }
 
-startGameBoard();
 showScreen('screen1');

@@ -1,7 +1,9 @@
 const screens = document.querySelectorAll('.screen');
 const startBtn = document.getElementById('start-btn');
 const toMemoriesBtn = document.getElementById('to-memories');
-const toMarch8Btn = document.getElementById('to-march8');
+const toThanksBtn = document.getElementById('to-thanks');
+const toLetterBtn = document.getElementById('to-letter');
+const toFinalBtn = document.getElementById('to-final');
 const introHeartEl = document.getElementById('intro-heart');
 const photoModalEl = document.getElementById('photo-modal');
 const photoModalImageEl = document.getElementById('photo-modal-image');
@@ -19,8 +21,14 @@ if (startBtn) {
 if (toMemoriesBtn) {
   toMemoriesBtn.addEventListener('click', () => showScreen('screen4'));
 }
-if (toMarch8Btn) {
-  toMarch8Btn.addEventListener('click', () => showScreen('screen5'));
+if (toThanksBtn) {
+  toThanksBtn.addEventListener('click', () => showScreen('screen5'));
+}
+if (toLetterBtn) {
+  toLetterBtn.addEventListener('click', () => showScreen('screen6'));
+}
+if (toFinalBtn) {
+  toFinalBtn.addEventListener('click', () => showScreen('screen7'));
 }
 
 // Hearts checkbox behavior on screen 2.
@@ -32,6 +40,14 @@ document.querySelectorAll('.reason-item .heart-check').forEach((button) => {
     item.classList.toggle('selected', willSelect);
     button.textContent = willSelect ? '💗' : '🤍';
     button.setAttribute('aria-pressed', String(willSelect));
+  });
+});
+
+// Gratitude cards reveal animation on click.
+document.querySelectorAll('.gratitude-card').forEach((card) => {
+  card.addEventListener('click', () => {
+    const isOpen = card.classList.toggle('is-open');
+    card.setAttribute('aria-expanded', String(isOpen));
   });
 });
 
@@ -94,55 +110,57 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') closePhotoModal();
 });
 
-// Falling hearts in background on all screens.
-const heartRain = document.getElementById('heart-rain');
+// Falling flowers in background on all screens.
+const flowerRain = document.getElementById('flower-rain');
 const mobileMedia = window.matchMedia('(max-width: 700px)');
 const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+const flowerSymbols = ['🌷', '🌸', '🌼', '🌹', '🌺'];
 
 let isMobile = mobileMedia.matches;
 let reduceMotion = motionMedia.matches;
-let maxHearts = isMobile ? 22 : 40;
-let heartSpawnRate = isMobile ? 340 : 240;
-let heartIntervalId = null;
+let maxFlowers = isMobile ? 20 : 36;
+let flowerSpawnRate = isMobile ? 360 : 250;
+let flowerIntervalId = null;
 
-function canAnimateHearts() {
-  return !reduceMotion && !document.hidden;
+function canAnimateFlowers() {
+  return Boolean(flowerRain) && !reduceMotion && !document.hidden;
 }
 
-function spawnHeart() {
-  if (!heartRain || !canAnimateHearts()) return;
-  if (heartRain.childElementCount >= maxHearts) return;
+function spawnFlower() {
+  if (!canAnimateFlowers()) return;
+  if (flowerRain.childElementCount >= maxFlowers) return;
 
-  const heart = document.createElement('span');
-  heart.className = 'bg-heart';
-  heart.textContent = Math.random() > 0.86 ? '💖' : '💗';
-  heart.style.left = `${Math.random() * 100}%`;
-  heart.style.fontSize = `${isMobile ? 12 + Math.random() * 9 : 14 + Math.random() * 14}px`;
-  heart.style.animationDuration = `${isMobile ? 7 + Math.random() * 5 : 6 + Math.random() * 5}s`;
-  heart.style.setProperty('--drift', `${-24 + Math.random() * 48}px`);
-  heartRain.appendChild(heart);
+  const flower = document.createElement('span');
+  flower.className = 'bg-flower';
+  flower.textContent = flowerSymbols[Math.floor(Math.random() * flowerSymbols.length)];
+  flower.style.left = `${Math.random() * 100}%`;
+  flower.style.fontSize = `${isMobile ? 13 + Math.random() * 8 : 15 + Math.random() * 13}px`;
+  flower.style.animationDuration = `${isMobile ? 8 + Math.random() * 4 : 7 + Math.random() * 4}s`;
+  flower.style.opacity = `${0.72 + Math.random() * 0.26}`;
+  flower.style.setProperty('--drift', `${-28 + Math.random() * 56}px`);
+  flowerRain.appendChild(flower);
 
-  heart.addEventListener('animationend', () => {
-    heart.remove();
+  flower.addEventListener('animationend', () => {
+    flower.remove();
   });
 }
 
-function startHearts() {
-  if (heartIntervalId) clearInterval(heartIntervalId);
-  if (!canAnimateHearts()) return;
-  heartIntervalId = setInterval(spawnHeart, heartSpawnRate);
+function startFlowers() {
+  if (flowerIntervalId) clearInterval(flowerIntervalId);
+  if (!canAnimateFlowers()) return;
+  flowerIntervalId = setInterval(spawnFlower, flowerSpawnRate);
 }
 
-document.addEventListener('visibilitychange', startHearts);
+document.addEventListener('visibilitychange', startFlowers);
 const onMobileMediaChange = (event) => {
   isMobile = event.matches;
-  maxHearts = isMobile ? 22 : 40;
-  heartSpawnRate = isMobile ? 340 : 240;
-  startHearts();
+  maxFlowers = isMobile ? 20 : 36;
+  flowerSpawnRate = isMobile ? 360 : 250;
+  startFlowers();
 };
 const onMotionMediaChange = (event) => {
   reduceMotion = event.matches;
-  startHearts();
+  startFlowers();
 };
 
 if (mobileMedia.addEventListener) {
@@ -153,9 +171,9 @@ if (mobileMedia.addEventListener) {
   motionMedia.addListener(onMotionMediaChange);
 }
 
-startHearts();
+startFlowers();
 for (let i = 0; i < (isMobile ? 10 : 18); i += 1) {
-  setTimeout(spawnHeart, i * (isMobile ? 190 : 140));
+  setTimeout(spawnFlower, i * (isMobile ? 210 : 150));
 }
 
 showScreen('screen1');

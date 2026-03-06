@@ -28,6 +28,7 @@ body.modal-open {
 
 .btn,
 .heart-check,
+.gratitude-card,
 .photo-modal-close,
 .photo-wrap {
   touch-action: manipulation;
@@ -59,7 +60,7 @@ body.modal-open {
   animation: introHeartPop 1.15s ease both;
 }
 
-#heart-rain {
+#flower-rain {
   position: fixed;
   inset: 0;
   pointer-events: none;
@@ -67,21 +68,19 @@ body.modal-open {
   z-index: 0;
 }
 
-.bg-heart {
+.bg-flower {
   position: absolute;
   top: -30px;
-  color: #f7a1c3;
-  opacity: 0.85;
-  animation: heartDrop linear forwards;
+  animation: flowerDrop linear forwards;
   user-select: none;
 }
 
-@keyframes heartDrop {
+@keyframes flowerDrop {
   from {
     transform: translateY(-6vh) translateX(0) rotate(0deg);
   }
   to {
-    transform: translateY(112vh) translateX(var(--drift)) rotate(28deg);
+    transform: translateY(112vh) translateX(var(--drift)) rotate(24deg);
     opacity: 0.15;
   }
 }
@@ -105,7 +104,7 @@ body.modal-open {
 }
 
 #screen1.active,
-#screen5.active {
+#screen7.active {
   align-items: center;
   min-height: calc(100vh - max(16px, env(safe-area-inset-top)) - max(24px, env(safe-area-inset-bottom)));
 }
@@ -237,6 +236,115 @@ h3 {
   animation: reasonTextIn 0.24s ease;
 }
 
+.gratitude-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.gratitude-card {
+  width: 100%;
+  border: 1px solid #f4d4e3;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #fff5fa 100%);
+  padding: 14px 14px 12px;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(214, 128, 166, 0.16);
+  transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.gratitude-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(214, 128, 166, 0.2);
+}
+
+.gratitude-card:focus-visible {
+  outline: 2px solid #f189b7;
+  outline-offset: 1px;
+}
+
+.gratitude-card.is-open {
+  border-color: #efb8d2;
+}
+
+.gratitude-title {
+  display: block;
+  color: #8f345f;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.gratitude-text {
+  display: block;
+  margin: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-3px);
+  color: #664f5a;
+  font-size: 15px;
+  line-height: 1.4;
+  transition: max-height 0.35s ease, margin-top 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+
+.gratitude-card.is-open .gratitude-text {
+  margin-top: 8px;
+  max-height: 92px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.letter-panel {
+  width: min(760px, 100%);
+}
+
+.letter-card {
+  position: relative;
+  margin-top: 18px;
+  text-align: left;
+  border: 1px solid #f0ddc5;
+  border-radius: 18px;
+  padding: 24px 22px;
+  background: linear-gradient(180deg, #fffdf8 0%, #fff5ea 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65), 0 14px 30px rgba(170, 111, 88, 0.2);
+}
+
+.letter-card::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px dashed #e9cdae;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.letter-text,
+.letter-sign {
+  position: relative;
+  margin: 0;
+}
+
+.letter-text {
+  color: #5e454d;
+  font-size: 21px;
+  line-height: 1.58;
+}
+
+.letter-text + .letter-text {
+  margin-top: 12px;
+}
+
+.letter-sign {
+  margin-top: 16px;
+  color: #9a3d67;
+  font-size: 23px;
+  font-weight: 700;
+}
+
 .gallery {
   margin-top: 18px;
   display: grid;
@@ -348,13 +456,13 @@ h3 {
   cursor: pointer;
 }
 
-#screen5 .panel {
+#screen7 .panel {
   position: relative;
   overflow: hidden;
 }
 
-#screen5 .panel::after {
-  content: "💗";
+#screen7 .panel::after {
+  content: "🌸";
   position: absolute;
   right: 14px;
   top: 12px;
@@ -464,7 +572,42 @@ h3 {
     font-size: 22px;
   }
 
+  .gratitude-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .gratitude-card {
+    padding: 12px 12px 11px;
+  }
+
+  .gratitude-title {
+    font-size: 16px;
+  }
+
+  .gratitude-text {
+    font-size: 14px;
+  }
+
+  .letter-card {
+    padding: 16px 14px;
+  }
+
+  .letter-card::before {
+    inset: 8px;
+  }
+
+  .letter-text {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .letter-sign {
+    font-size: 18px;
+  }
+
   .reason-text,
+  .gratitude-text,
   .memory-card p,
   .photo-wrap.is-empty::before {
     font-size: 14px;
@@ -521,18 +664,20 @@ h3 {
 
 @media (prefers-reduced-motion: reduce) {
   .btn,
+  .gratitude-card,
+  .gratitude-text,
   .memory-card,
   .photo-modal {
     transition: none;
   }
 
-  .bg-heart {
+  .bg-flower {
     animation-duration: 0.01ms !important;
   }
 
   .panel,
   .reason-item.selected .reason-text,
-  #screen5 .panel::after,
+  #screen7 .panel::after,
   .intro-heart-icon {
     animation: none !important;
   }
